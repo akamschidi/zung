@@ -28,8 +28,12 @@ public class MathService {
         return mathsRepo.findAll();
     }
 
-    public Maths findMathsStudentByCourseCode(Integer courseCode){
+    public Optional<Maths> findMathsStudentByCourseCode(Integer courseCode){
         return mathsRepo.findByCourseCode(courseCode);
+    }
+
+    public Optional<Maths> findMathsStudentById(Integer id){
+        return mathsRepo.findById(id);
     }
 
     public Optional<Maths> updateMathsStudentDetail(Integer id, Maths mathsStudentDetails){

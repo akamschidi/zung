@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -32,18 +35,47 @@ public class MathsController {
        return mathService.registerMathsStudent(maths);
     }
 
-    @GetMapping("/mathsstudents/{course_code}")
-    public Maths findMathsStudent(@PathVariable Integer courseCode) {
-       return mathService.findMathsStudentByCourseCode(courseCode);
+    @GetMapping("/findmathsstudents/{course_code}")
+    public ResponseEntity<Maths> findMathsStudent(@PathVariable Integer courseCode) {
+       return mathService.findMathsStudentByCourseCode(courseCode)
+                .map(ResponseEntity:: ok)
+                .orElseGet(() -> ResponseEntity.notFound()
+                .build());
 
     }
+
+    @GetMapping("/findmathsstudentsid/{id}")
+    public ResponseEntity<Maths> getMethodName(@PathVariable Integer id) {
+        return mathService.findMathsStudentById(id)
+                .map(ResponseEntity:: ok)
+                .orElseGet(() -> ResponseEntity.notFound()
+                .build());
+    }
+    
 
     @GetMapping("/allmathsstudents")
     public List<Maths> allMathsStudents() {
         return mathService.listOfAllMathsStudents();
     }
     
+    @PutMapping("updatemathstudent/{id}")
+    public ResponseEntity<Maths> updateMathsStudent(@PathVariable Integer id, @RequestBody Maths mathsStudentDetails) {
+        return mathService.updateMathsStudentDetail(id, mathsStudentDetails)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound()
+                .build());
+   
+    }
     
-    
+    @DeleteMapping("/deletemathsstudent/{id}")
+    public ResponseEntity<?> deleteMathsStudent(@PathVariable Integer id){
+       return mathService.findMathsStudentById(id)
+                .map(maths -> {
+                    mathService.deleteMathsStudent(id);
+                    return ResponseEntity.ok()
+                    .build();
+                }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     
 }
