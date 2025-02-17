@@ -31,6 +31,10 @@ public class ComputerService {
         return computerRepo.findAll();
     }
 
+    public Optional<Computer> findComputerStudentByID(Integer id){
+        return computerRepo.findById(id);
+    }
+
     public Optional<Computer> updateComputerStudentDetails(Integer id, Computer computerStudentDetails){
         return computerRepo.findById(id).map(computerStudent ->{
             computerStudent.setFirstName(computerStudentDetails.getFirstName());
