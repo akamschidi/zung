@@ -45,7 +45,7 @@ public class MathsController {
     }
 
     @GetMapping("/findmathsstudentsid/{id}")
-    public ResponseEntity<Maths> getMethodName(@PathVariable Integer id) {
+    public ResponseEntity<Maths> mathStudentByID(@PathVariable Integer id) {
         return mathService.findMathsStudentById(id)
                 .map(ResponseEntity:: ok)
                 .orElseGet(() -> ResponseEntity.notFound()

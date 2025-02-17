@@ -23,12 +23,16 @@ public class EnglishService {
         return englishRepo.save(english);
     }
 
-    public List<English> listOfAllEnglishStudents(English english){
+    public List<English> listOfAllEnglishStudents(){
         return englishRepo.findAll();
     }
 
     public English findEnglishStudentByCourseCode(Integer courseCode){
         return englishRepo.findByCourseCode(courseCode);
+    }
+
+    public Optional<English> findEnglishStudentByID(Integer id){
+        return englishRepo.findById(id);
     }
 
     public Optional<English> updateEnglishStudentDetails(Integer id, English englishStudentDetails){
