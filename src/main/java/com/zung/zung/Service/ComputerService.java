@@ -27,7 +27,7 @@ public class ComputerService {
         return computerRepo.findByCourseCode(CourseCode);
     }
 
-    public List<Computer> findAllComputerStudents(Computer computerStudent){
+    public List<Computer> findAllComputerStudents(){
         return computerRepo.findAll();
     }
 

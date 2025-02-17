@@ -35,8 +35,8 @@ public class ComputerController {
     }
 
     @GetMapping("/allcomputerstudents")
-    public List<Computer> allComputerStudents(@RequestBody Computer computer) {
-        return computerService.findAllComputerStudents(computer);
+    public List<Computer> allComputerStudents() {
+        return computerService.findAllComputerStudents();
     }
     
     @GetMapping("/computerstudentid/{id}")
